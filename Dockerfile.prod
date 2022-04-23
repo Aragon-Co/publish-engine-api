@@ -1,11 +1,12 @@
 ###############################################################
 # Stage 1: Install dev packages and create build
 ###############################################################
-FROM node:14.17.0-alpine as build
+FROM node:18.0-alpine as build
 
 WORKDIR /app
 
 COPY package.json yarn.lock ./
+COPY knex ./knex
 
 RUN yarn config set "strict-ssl" false && yarn
 
@@ -27,5 +28,6 @@ COPY package.json ./
 
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/knex ./knex
 
 CMD [ "yarn", "start" ]

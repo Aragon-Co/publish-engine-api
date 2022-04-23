@@ -1,18 +1,32 @@
 version: "3.1"
 
 services:
-  server:
+  api:
+    container_name: publish-engine-api
     build:
+      context: '.'
       dockerfile: ./Dockerfile.dev
     ports:
       - 4000:4000
     restart: always
-    container_name: server
     env_file:
       - ./.env
     volumes:
-      - ./server:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./src:/app/src:cached
+  migrations:
+    container_name: publish-engine-migrations
+    build:
+      context: '.'
+      dockerfile: ./Dockerfile.dev
+    depends_on:
+      - db
+    command: sh -c "/scripts/wait-for-it.sh db:3306 -- yarn migrate:dev"
+    env_file:
+      - ./.env
+    volumes:
+      - ./src:/app/src:cached
+      - ./scripts:/scripts/:cached
+
 
   db:
     image: mariadb
@@ -23,9 +37,10 @@ services:
     environment:
       MYSQL_ROOT_USER: "${MYSQL_ROOT_USER}"
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-      MYSQL_DATABASE: "publishing_engine_dev"
+      MYSQL_DATABASE: "publishing_engine"
     volumes:
-      - ./sqldb:/var/lib/mysql
+      - ./sqldb/data:/var/lib/mysql
+      - ./sqldb/scripts:/docker-entrypoint-initdb.d
 
   adminer:
     image: adminer

@@ -1,4 +1,4 @@
-FROM node:14.17.0-alpine
+FROM node:18.0-alpine
 
 RUN apk add --no-cache bash
 
@@ -17,6 +17,7 @@ RUN yarn install --frozen-lockfile
 
 # These are also mapped as volumes for quick nodemon changes
 COPY src ./src
+COPY knex ./knex
 COPY tsconfig.json ./tsconfig.json
 COPY knexfile.ts ./knexfile.ts
 

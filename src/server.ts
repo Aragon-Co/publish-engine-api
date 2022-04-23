@@ -37,7 +37,7 @@ export const server = async () => {
 
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use('/auth', authRoutes);
+    app.use('/authenticate', authRoutes);
     app.use(
         '/graphql',
         jwt({

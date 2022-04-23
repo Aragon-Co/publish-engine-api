@@ -5,14 +5,14 @@ export default {
             host: 'db',
             user: 'root',
             password: 'SuperSecretPassword',
-            database: 'publishing_engine_dev'
+            database: 'publishing_engine'
         },
         migrations: {
             tableName: 'knex_migrations',
-            directory: `./db/migrations`
+            directory: `./knex/migrations`
         },
         seeds: {
-            directory: `./db/seeds`
+            directory: `./knex/seeds`
         }
     },
     staging: {
@@ -21,14 +21,14 @@ export default {
             host: 'db',
             user: 'root',
             password: 'SuperSecretPassword',
-            database: 'publishing_engine_stage'
+            database: 'publishing_engine'
         },
         migrations: {
             tableName: 'knex_migrations',
-            directory: `./db/migrations`
+            directory: `./knex/migrations`
         },
         seeds: {
-            directory: `./db/seeds`
+            directory: `./knex/seeds`
         }
     },
     production: {
@@ -37,14 +37,14 @@ export default {
             host: 'db',
             user: 'root',
             password: 'SuperSecretPassword',
-            database: 'publishing_engine_prod'
+            database: 'publishing_engine'
         },
         migrations: {
             tableName: 'knex_migrations',
             directory: `./db/migrations`
         },
         seeds: {
-            directory: `./db/seeds`
+            directory: `./knex/seeds`
         }
     }
 };

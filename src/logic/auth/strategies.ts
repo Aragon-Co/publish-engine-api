@@ -26,7 +26,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: '/auth/google/callback'
+            callbackURL: '/authenticate/google/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
@@ -57,7 +57,7 @@ passport.use(
         {
             clientID: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
-            callbackURL: '/auth/github/callback'
+            callbackURL: '/authenticate/github/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
@@ -88,7 +88,7 @@ passport.use(
         {
             clientID: process.env.FACEBOOK_APP_ID,
             clientSecret: process.env.FACEBOOK_APP_SECRET,
-            callbackURL: '/auth/facebook/callback',
+            callbackURL: '/authenticate/facebook/callback',
             // scope: ['email'],
             profileFields: ['email', 'location', 'name', 'picture']
         },
@@ -121,7 +121,7 @@ passport.use(
         {
             clientID: process.env.DISCORD_CLIENT_ID,
             clientSecret: process.env.DISCORD_CLIENT_SECRET,
-            callbackURL: '/auth/discord/callback',
+            callbackURL: '/authenticate/discord/callback',
             scope: ['identify', 'email']
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {

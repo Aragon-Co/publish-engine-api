@@ -5,8 +5,10 @@ import { PostService } from '../../sql-dal/Post';
 import { UserService } from '../../sql-dal/User';
 import { SearchInput } from '../entities/Search';
 import { ImageService } from '../../sql-dal/Image';
-import { S3ImageService } from '../../minio-dal/image';
-import { S3PostService } from '../../minio-dal/Post';
+// import { S3ImageService } from '../../minio-dal/image';
+// import { S3PostService } from '../../minio-dal/Post';
+import { S3PostService } from '../../s3-dal/Post';
+import { S3ImageService } from '../../s3-dal/Image';
 import _ from 'lodash';
 
 @Resolver()

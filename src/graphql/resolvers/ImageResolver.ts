@@ -2,8 +2,10 @@ import { Query, Resolver, Authorized, Arg, Mutation } from 'type-graphql';
 import { CurrentUser } from '../../logic/auth/current-user';
 import { Image, ImageInput } from '../entities/Image';
 import { ImageService } from '../../sql-dal/Image';
-import { S3ImageService } from '../../minio-dal/image';
+// import { S3ImageService } from '../../minio-dal/image';
+
 import { UserService } from '../../sql-dal/User';
+import { S3ImageService } from '../../s3-dal/Image';
 
 @Resolver()
 export class ImageResolver {
