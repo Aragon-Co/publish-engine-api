@@ -30,6 +30,6 @@ COPY package.json ./
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/knex ./knex
-COPY --from=build /app/knex ./scripts
+COPY --from=build /app/scripts ./scripts
 
 CMD [ "yarn", "start" ]
