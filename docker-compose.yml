@@ -13,6 +13,7 @@ services:
       - ./.env
     volumes:
       - ./src:/app/src:cached
+
   migrations:
     container_name: publish-engine-migrations
     build:
@@ -20,13 +21,9 @@ services:
       dockerfile: ./Dockerfile.dev
     depends_on:
       - db
-    command: sh -c "/scripts/wait-for-it.sh db:3306 -- yarn migrate:dev"
+    command: sh -c "./scripts/wait-for-it.sh db:3306 -- yarn migrate:dev"
     env_file:
       - ./.env
-    volumes:
-      - ./src:/app/src:cached
-      - ./scripts:/scripts/:cached
-
 
   db:
     image: mariadb
