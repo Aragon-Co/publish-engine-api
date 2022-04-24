@@ -6,6 +6,7 @@ import passportDiscord from 'passport-discord';
 
 import { UserService } from '../../sql-dal/User';
 import { User } from '../../graphql/entities/User';
+import webServerConfig from '../../config';
 
 const GoogleStrategy = passportGoogle.Strategy;
 const GitHubStrategy = passportGithub.Strategy;
@@ -20,13 +21,14 @@ passport.deserializeUser((obj: any, done: (err: any, id?: any) => void) => {
     done(null, obj);
 });
 
+
 /** Google strategy */
 passport.use(
     new GoogleStrategy(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: '/authenticate/google/callback'
+            callbackURL: `${webServerConfig.webUrl}/authenticate/google/callback`
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
@@ -57,7 +59,7 @@ passport.use(
         {
             clientID: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
-            callbackURL: '/authenticate/github/callback'
+            callbackURL: `${webServerConfig.webUrl}/authenticate/github/callback`
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
@@ -88,7 +90,7 @@ passport.use(
         {
             clientID: process.env.FACEBOOK_APP_ID,
             clientSecret: process.env.FACEBOOK_APP_SECRET,
-            callbackURL: '/authenticate/facebook/callback',
+            callbackURL: `${webServerConfig.webUrl}/authenticate/facebook/callback`,
             // scope: ['email'],
             profileFields: ['email', 'location', 'name', 'picture']
         },
@@ -121,7 +123,7 @@ passport.use(
         {
             clientID: process.env.DISCORD_CLIENT_ID,
             clientSecret: process.env.DISCORD_CLIENT_SECRET,
-            callbackURL: '/authenticate/discord/callback',
+            callbackURL: `${webServerConfig.webUrl}/authenticate/discord/callback`,
             scope: ['identify', 'email']
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
