@@ -12,8 +12,11 @@ import { readFileSync } from 'fs';
 
 import buildSchema from './graphql';
 import authRoutes from './routes/auth-routes';
+import { loadConfig } from './config';
 
 export const server = async () => {
+    await loadConfig()
+    
     const port = process.env.PORT || 4000;
     const schema = await buildSchema();
 
